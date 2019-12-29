@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block header %}
+  {% include "title.html" %}
+  <div class="mt2 mb3">
+    <a href="{{ SITEURL }}/pages/about" class="link dim f4 fw3 near-black">
+      {{ AUTHOR }}
+    </a>
+  </div>
+  <div class="flex flex-wrap mw7 pb4">
+    {% for tag, articles in tags|sort %}
+      {% include "tag_div.html" %}
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  {% for article in articles_page.object_list %}
+    <article>
+      <div class="flex flex-column bb pb2 b--moon-gray">
+        <div>
+          <a href="{{ SITEURL }}/posts/{{ article.slug }}"
+            class="link dim mid-gray f4 fw6">
+            {{ article.title }}
+          </a>
+        </div>
+        <div class="pt2">
+          <span class="mid-gray fw3 f6">{{ article.date|strftime("%Y-%B-%d") }}</span>
+        </div>
+        <div>
+          <a href="{{ SITEURL }}/posts/{{ article.slug }}" class="link dim near-black">
+            {{ article.summary }}
+            <div>...</div>
+          </a>
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+{% endblock %}

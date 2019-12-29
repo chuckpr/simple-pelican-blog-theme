@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block header %}
+  {% include "title.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="flex flex-column">
+    <div>
+      <h1 class="mid-gray fw6">{{ page.title }}</h1>
+    </div>
+    <div class="near-black">
+      {{ page.content }}
+    </div>
+  </div>
+{% endblock %}
