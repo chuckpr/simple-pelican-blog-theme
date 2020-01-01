@@ -4,9 +4,15 @@
 <head>
   {% block head %}
   <meta charset="utf-8" />
-  <meta name="viewport" content="width-device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="twitter:card" content="summary"/>
+  {% if TWITTER_USERNAME %}
+  <meta name="twitter:creator" content="@{{ TWITTER_USERNAME }}"/>
+  {% endif %}
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
   {% endblock head %}
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/notebook.css">
 </head>
 
 <body>
@@ -15,22 +21,25 @@
       {% block header %}
       {% endblock header %}
     </div>
-    <div id="content" class="flex-auto">
+    <div id="content" class="flex-auto mb5">
       {% block content %}
       {% endblock %}
     </div>
-    <div id="footer" class="pv3 flex justify-between">
-      <div class="flex flex-column w-50 ml4-ns ml0">
-        <div class="mid-gray fw4">
+    <div id="footer" class="pv3 flex justify-between mb4">
+      <div class="flex flex-column">
+        <div class="mid-gray fw4 f6-ns f7 mb2">
+          Copyright &copy; 2020 {{ AUTHOR|replace(" ", "&nbsp;")|replace("-", "&#8209;") }}
+        </div>
+        <div class="mid-gray fw4 f6-ns f7">
           Powered by <a href="https://getpelican.com/" class="link dim mid-gray fw6">Pelican</a>
         </div>
       </div>
-      <div class="flex justify-end w-50 mr4-ns mr0 ml2">
+      <div class="flex justify-end w-50-ns w-30 mr4-ns mr0 ml2">
         {% if SOCIAL %}
           {% for icon, link in SOCIAL|sort %}
-              <div class="w-10-ns w2 ml3-ns ml2 grow">
+              <div class="w-10-ns w2-ns ml2 grow">
                 <a href="{{ link }}" class="light-purple dim link">
-                  <div class="o-50">
+                  <div class="o-50 pa1-l">
                     {% include "icons/" + icon + ".svg" %}
                   </div>
                 </a>

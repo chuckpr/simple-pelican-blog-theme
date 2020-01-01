@@ -2,14 +2,15 @@
 
 {% block header %}
   {% include "title.html" %}
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/page.css">
 {% endblock %}
 
 {% block content %}
-  <div class="flex flex-column">
+  <div id="page-content" class="flex flex-column">
     <div>
-      <h1 class="mid-gray fw6">{{ page.title }}</h1>
+      <h1 class="mid-gray fw5">{{ page.title }}</h1>
     </div>
-    <div class="near-black">
+    <div class="near-black lh-copy f4">
       {{ page.content }}
     </div>
   </div>

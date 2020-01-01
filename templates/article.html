@@ -1,24 +1,44 @@
 {% extends "base.html" %}
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/article.css">
+{% endblock %}
+
 {% block header %}
   {% include "title.html" %}
 {% endblock %}
 
 {% block content %}
   <div class="flex flex-column">
-    <div>
-      <h1 class="mid-gray fw6">{{ article.title }}</h1>
+    <div class="flex justify-between items-center article-title bb bw1 b--light-gray">
+      <div>
+        <div class="flex flex-column">
+          <div>
+            <p class="f3-ns f4 mv0 lh-title">
+              {{ article.title }}
+            </p>
+          </div>
+          <div class="ml3">
+            <p class="f6 ttc mb0 mt1 mid-gray">
+              {{ article.locale_date }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-40">
+        <div class="flex flex-wrap justify-end">
+          {% for tag in article.tags %}
+            {% include 'tag_div.html' %}
+          {% endfor %}
+        </div>
+      </div>
     </div>
-    <div>
-      <h3 class="mid-gray ma1 fw3">Tags:</h3>
-    </div>
-    <div class="flex flex-wrap mw7 pb2">
-      {% for tag in article.tags %}
-        {% include 'tag_div.html' %}
-      {% endfor %}
-    </div>
-    <div class="near-black">
+    <div class="ph3">
       {{ article.content }}
     </div>
+    {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+      {% include 'disqus.html' %}
+    {% endif %}
   </div>
 {% endblock %}

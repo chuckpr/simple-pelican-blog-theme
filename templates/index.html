@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
+{% block head %}
+  {{ super() }}
+  <meta property="og:title" content="{{ SITENAME }}"/>
+  <meta property="og:url" content="{{ SITEURL }}"/>
+  {% if TWITTER_CARD_IMAGE_URL %}
+  <meta property="og:image" content="{{ TWITTER_CARD_IMAGE_URL }}"/>
+  <meta name="twitter:image" content="{{ TWITTER_CARD_IMAGE_URL }}"/>
+  {% endif %}
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/index.css">
+{% endblock %}
+
 {% block header %}
   {% include "title.html" %}
-  <div class="mt2 mb3">
+  <div class="mt2 mb4">
     <a href="{{ SITEURL }}/pages/about" class="link dim f4 fw3 near-black">
       {{ AUTHOR }}
     </a>
   </div>
-  <div class="flex flex-wrap mw7 pb4">
+  <div class="flex flex-wrap pb4">
     {% for tag, articles in tags|sort %}
       {% include "tag_div.html" %}
     {% endfor %}
@@ -15,25 +26,28 @@
 {% endblock %}
 
 {% block content %}
+  <div class="flex flex-column pb2">
+    <div class="pl2">
+      <h1 class="f3 fw6 tracked">
+        Posts
+      </h1>
+    </div>
   {% for article in articles_page.object_list %}
-    <article>
-      <div class="flex flex-column bb pb2 b--moon-gray">
-        <div>
+    <div class="flex w-100 items-center pl4">
+      <div style="width: 175px;">
+        <p class="fw3 f5 near-black mv2">
+          {{ article.date|strftime("%Y-%B-%d") }}
+        </p>
+      </div>
+      <div class="ml4-l ml3 w-60">
+        <p class="f5-ns f6 fw5 mv2 lh-title">
           <a href="{{ SITEURL }}/posts/{{ article.slug }}"
-            class="link dim mid-gray f4 fw6">
+            class="link dim purple">
             {{ article.title }}
           </a>
-        </div>
-        <div class="pt2">
-          <span class="mid-gray fw3 f6">{{ article.date|strftime("%Y-%B-%d") }}</span>
-        </div>
-        <div>
-          <a href="{{ SITEURL }}/posts/{{ article.slug }}" class="link dim near-black">
-            {{ article.summary }}
-            <div>...</div>
-          </a>
-        </div>
+        </p>
       </div>
-    </article>
+    </div>
   {% endfor %}
+  </div>
 {% endblock %}
