@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
+  <title>{{ SITENAME }}</title>
   {{ super() }}
   <meta property="og:title" content="{{ SITENAME }}"/>
   <meta property="og:url" content="{{ SITEURL }}"/>
@@ -13,9 +14,21 @@
 
 {% block header %}
   {% include "title.html" %}
-  <div class="mt2 mb4">
-    <a href="{{ SITEURL }}/pages/about" class="link dim f4 fw3 near-black">
-      {{ AUTHOR }}
+  <div class="flex items-center w-100 w-50-ns mt1 mb4 ml3-l ml0">
+    <div>
+      <a href="{{ SITEURL }}/pages/about" class="link dim w-50-ns w-100 gray f4 fw5">
+        {{ AUTHOR }}
+      </a>
+    </div>
+    <a href="{{ SITEURL }}/pages/about">
+      <div class="flex ml1">
+        <div style="height: 16px; width: 16px;">
+          {% include 'icons/arrow.svg' %}
+        </div>
+        <div style="height: 16px; width: 16px;">
+          {% include 'icons/arrow.svg' %}
+        </div>
+      </div>
     </a>
   </div>
   <div class="flex flex-wrap pb4">
@@ -27,14 +40,14 @@
 
 {% block content %}
   <div class="flex flex-column pb2">
-    <div class="pl2">
+    <div class="pl2-ns pl0">
       <h1 class="f3 fw6 tracked">
         Posts
       </h1>
     </div>
   {% for article in articles_page.object_list %}
-    <div class="flex w-100 items-center pl4">
-      <div style="width: 175px;">
+    <div class="flex w-100 items-center pl4-ns pl0">
+      <div class="w-50 w-30-m w-20-l">
         <p class="fw3 f5 near-black mv2">
           {{ article.date|strftime("%Y-%B-%d") }}
         </p>
@@ -42,7 +55,7 @@
       <div class="ml4-l ml3 w-60">
         <p class="f5-ns f6 fw5 mv2 lh-title">
           <a href="{{ SITEURL }}/posts/{{ article.slug }}"
-            class="link dim purple">
+            class="link dim near-black">
             {{ article.title }}
           </a>
         </p>
