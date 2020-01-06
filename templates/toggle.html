@@ -1,0 +1,61 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+  console.log('Adding toggle buttons');
+  {% if TOGGLE_CODE_BUTTON_TEXT %}
+  var $toggleCodeButton = $('\
+    <a class="toggle toggle-code" href="#0">\
+      {{ TOGGLE_CODE_BUTTON_TEXT }}\
+    </a>\
+  ')
+  {% endif %}
+
+  {% if TOGGLE_ALL_BUTTON_TEXT %}
+  var $toggleAllButton = $('\
+    <div>\
+      <a class="toggle toggle-all" href="#0">\
+        {{ TOGGLE_ALL_BUTTON_TEXT }}\
+      </a>\
+    </div>\
+  ')
+  {% endif %}
+
+  // This adds the buttons
+  $(document).ready(function(){
+
+  {% if TOGGLE_CODE_TAG %}
+    $cellToggleCode = $('.celltag_{{ TOGGLE_CODE_TAG }}')
+    $cellToggleCode.find('.input').css('display', 'none');
+    $toggleCodeButton.prependTo($cellToggleCode);
+  {% endif %}
+
+  {% if TOGGLE_ALL_TAG %}
+    $cellToggleAll = $('.celltag_{{ TOGGLE_ALL_TAG }}');
+    $cellToggleAll.css('display', 'none');
+    $toggleAllButton.insertBefore($cellToggleAll);
+  {% endif %}
+
+  {% if HIDE_CELL_TAG %}
+    $('.celltag_{{ HIDE_CELL_TAG }}').css('display', 'none');
+  {% endif %}
+
+  });
+
+  {% if TOGGLE_CODE_TAG %}
+  // These add the toggle behavior for the buttons
+  $(document).ready(function(){
+    $('a.toggle-code').click(function(){
+      $(this).next('.input').slideToggle();
+    });
+  })
+  {% endif %}
+
+  {% if TOGGLE_CODE_TAG %}
+  $(document).ready(function(){
+    $('a.toggle-all').click(function(){
+      $(this).parent().next('div').slideToggle();
+    });
+  })
+  {% endif %}
+
+</script>
