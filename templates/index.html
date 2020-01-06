@@ -1,15 +1,28 @@
 {% extends "base.html" %}
 
 {% block head %}
+
   <title>{{ SITENAME }}</title>
   {{ super() }}
+
+  {% if DESCRIPTION %}
+  <meta itemprop="description"
+        name="description"
+        content="{{ DESCRIPTION }}"/>
+  <meta property="og:description" content="{{ DESCRIPTION }}"/>
+  <meta name="twitter:description" content="{{ DESCRIPTION }}"/>
+  {% endif %}
+
   <meta property="og:title" content="{{ SITENAME }}"/>
   <meta property="og:url" content="{{ SITEURL }}"/>
+
   {% if TWITTER_CARD_IMAGE_URL %}
   <meta property="og:image" content="{{ TWITTER_CARD_IMAGE_URL }}"/>
   <meta name="twitter:image" content="{{ TWITTER_CARD_IMAGE_URL }}"/>
   {% endif %}
+
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/index.css">
+
 {% endblock %}
 
 {% block header %}

@@ -2,8 +2,39 @@
 
 {% block header %}
   {% include "title.html" %}
-  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/page.css">
 {% endblock %}
+
+{% block head %}
+
+  <title>{{ page.title }}</title>
+
+  {{ super() }}
+
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/page.css">
+
+  <meta itemprop="description"
+        name="description"
+        content="{% if page.summary %}{{ page.summary }}{% else %}{{ DESCRIPTION }}{% endif %}"/>
+
+  <!-- Open Graph tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page.title }}"/>
+  <meta property="og:url" content="{{ SITEURL }}/{{ page.url }}"/>
+  {% if page.image %}
+  <meta property="og:image" content="{{ SITEURL }}/{{ page.image }}"/>
+  {% endif %}
+  <meta property="page:published_time" content="{{ page.date }}"/>
+  <meta property="og:description"
+        content="{{ page.summary|striptags }}"/>
+
+  <!-- Twitter card tags -->
+  <meta name="twitter:title" content="{{ page.title }}">
+  <meta name="twitter:description"
+        content="{{ page.summary|striptags }}"/>
+
+  <link rel="canonical" href="{{ SITEURL }}/{{ page.url }}">
+
+{% endblock head %}
 
 {% block content %}
   <div id="page-content" class="flex flex-column">
