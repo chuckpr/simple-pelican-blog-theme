@@ -12,17 +12,21 @@
 
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/page.css">
 
+  {% if page.summary %}
   <meta itemprop="description"
         name="description"
-        content="{% if page.summary %}{{ page.summary }}{% else %}{{ DESCRIPTION }}{% endif %}"/>
+        content="{{ page.summary|striptags }}"/>
+  {% endif %}
 
   <!-- Open Graph tags -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ page.title }}"/>
   <meta property="og:url" content="{{ SITEURL }}/{{ page.url }}"/>
-  {% if page.image %}
-  <meta property="og:image" content="{{ SITEURL }}/{{ page.image }}"/>
+  {% if CLOUDINARY_IMAGE and CLOUDINARY_URL %}
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="og:image" content="{{ CLOUDINARY_URL }}{{ page.title|replace("&nbsp;"," ")|urlencode }}/{{ CLOUDINARY_IMAGE }}"/>
   {% endif %}
+
   <meta property="page:published_time" content="{{ page.date }}"/>
   <meta property="og:description"
         content="{{ page.summary|striptags }}"/>
@@ -39,7 +43,7 @@
 {% block content %}
   <div id="page-content" class="flex flex-column">
     <div>
-      <h1 class="mid-gray fw5">{{ page.title }}</h1>
+      <h1 class="mid-gray fw5 avenir">{{ page.title }}</h1>
     </div>
     <div class="near-black lh-copy f5-ns f6">
       {{ page.content }}

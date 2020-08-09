@@ -16,9 +16,9 @@
   <meta property="og:title" content="{{ SITENAME }}"/>
   <meta property="og:url" content="{{ SITEURL }}"/>
 
-  {% if TWITTER_CARD_IMAGE_URL %}
-  <meta property="og:image" content="{{ TWITTER_CARD_IMAGE_URL }}"/>
-  <meta name="twitter:image" content="{{ TWITTER_CARD_IMAGE_URL }}"/>
+  {% if CLOUDINARY_INDEX_IMAGE and CLOUDINARY_URL %}
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="og:image" content="{{ CLOUDINARY_URL }}{{ SITENAME|replace("&nbsp;"," ")|urlencode }}/{{ CLOUDINARY_INDEX_IMAGE }}"/>
   {% endif %}
 
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/index.css">
@@ -27,51 +27,59 @@
 
 {% block header %}
   {% include "title.html" %}
-  <div class="flex items-center w-100 w-50-ns mt1 mb4 ml3-l ml0">
-    <div>
-      <a href="{{ SITEURL }}/pages/about" class="link dim w-50-ns w-100 gray f4 fw5">
-        {{ AUTHOR }}
+  <div class="flex items-center mt1 mb4 ml3 mr5">
+    <div class="flex flex-auto-ns justify-between-ns flex-row-ns flex-column mt0-ns mt1">
+      <a href="{{ SITEURL }}/pages/about" class="link dim w-50-ns w-100 gray">
+        <div class="flex flex-row items-center grow">
+          <div class="f4-l f5-m f6">
+              {{ AUTHOR }}
+          </div>
+          <div class="flex ml1">
+            <div style="height: 16px; width: 16px;">
+              {% include 'icons/arrow.svg' %}
+            </div>
+            <div style="height: 16px; width: 16px;">
+              {% include 'icons/arrow.svg' %}
+            </div>
+          </div>
+        </div>
       </a>
-    </div>
-    <a href="{{ SITEURL }}/pages/about">
-      <div class="flex ml1">
-        <div style="height: 16px; width: 16px;">
-          {% include 'icons/arrow.svg' %}
-        </div>
-        <div style="height: 16px; width: 16px;">
-          {% include 'icons/arrow.svg' %}
-        </div>
+      <div class="flex flex-row f6 mt3 mt0-ns">
+        {% for n, l in NAV_LINKS %}
+        <a href="{{ SITEURL }}/{{ l }}" class="link hover-mid-gray">
+          <div class="bl silver b--silver ph3 pv1 grow f7 f5-ns">
+            {{ n|upper }}
+          </div>
+        </a>
+        {% endfor %}
       </div>
-    </a>
-  </div>
-  <div class="flex flex-wrap pb4">
-    {% for tag, articles in tags|sort %}
-      {% include "tag_div.html" %}
-    {% endfor %}
+    </div>
   </div>
 {% endblock %}
 
 {% block content %}
-  <div class="flex flex-column pb2">
-    <div class="pl2-ns pl0">
-      <h1 class="f3 fw6 tracked">
-        Posts
-      </h1>
-    </div>
+  <div class="flex flex-column pb2 avenir">
   {% for article in articles_page.object_list %}
-    <div class="flex w-100 items-center pl4-ns pl0">
+    <div class="flex-l w-100 items-center pl2-ns pl0 mb3 mt3">
       <div class="w-50 w-30-m w-25-l">
-        <p class="fw3 f5 near-black mv2">
+        <p class="fw3 f5-ns f6 near-black mv2">
           {{ article.date|strftime("%Y-%B-%d") }}
         </p>
       </div>
-      <div class="ml4-l ml3 w-60">
-        <p class="f5-ns f6 fw5 mv2 lh-title">
-          <a href="{{ SITEURL }}/posts/{{ article.slug }}"
-            class="link dim near-black">
-            {{ article.title }}
-          </a>
-        </p>
+      <div class="ml0-l ml3 w-80 flex flex-column pb3 bb b--light-gray">
+        <div>
+          <p class="f4-ns f6 fw5 mv2 lh-title">
+            <a href="{{ SITEURL }}/posts/{{ article.slug }}"
+              class="link dim near-black">
+              {{ article.title }}
+            </a>
+          </p>
+        </div>
+        <div class="pl2">
+          <p class="georgia gray pa0 ma0 f6">
+            {{ article.summary|striptags }}
+          </p>
+        </div>
       </div>
     </div>
   {% endfor %}
