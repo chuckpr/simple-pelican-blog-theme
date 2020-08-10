@@ -49,17 +49,6 @@ code {
   font-family: Menlo, Consolas, Monaco, monospace;
 }
 
-.toggle {
-  padding-left: 2rem;
-  padding-right: 0.5rem;
-  border-left-style: solid;
-  border-left-width: 0.0625em;
-  border-color: #137752;
-  border-width: 0.125rem;
-  background-color: #e8fdf5;
-  color: #137752;
-}
-
 #article-content p {
   padding-top: 0.5rem;
 }
