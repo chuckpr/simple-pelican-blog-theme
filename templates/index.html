@@ -29,7 +29,7 @@
   {% include "title.html" %}
   <div class="flex items-center mt1 mb4 ml3 mr5">
     <div class="flex flex-auto-ns justify-between-ns flex-row-ns flex-column mt0-ns mt1">
-      <a href="{{ SITEURL }}/pages/about" class="link dim w-50-ns w-100 gray">
+      <a href="{{ SITEURL }}/pages/about.html" class="link dim w-50-ns w-100 gray">
         <div class="flex flex-row items-center grow">
           <div class="f4-l f5-m f6">
               {{ AUTHOR }}
@@ -69,7 +69,7 @@
       <div class="ml0-l ml3 w-80 flex flex-column pb3 bb b--light-gray">
         <div>
           <p class="f4-ns f6 fw5 mv2 lh-title">
-            <a href="{{ SITEURL }}/posts/{{ article.slug }}"
+            <a href="{{ SITEURL }}/{{ article.url }}"
               class="link dim near-black">
               {{ article.title }}
             </a>
