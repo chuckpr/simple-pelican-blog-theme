@@ -31,7 +31,13 @@
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/pygments.css">
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/article.css">
   {% if EXTRA_CSS.get("article", None) %}
-    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ EXTRA_CSS["article"] }}">
+  <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ EXTRA_CSS["article"] }}">
+  {% endif %}
+
+  {% if EXTRA_JS.get("article", []) %}
+  {% for js in EXTRA_JS["article"] %}
+  <script src="{{ js }}"></script>
+  {% endfor %}
   {% endif %}
 
 {% endblock %}
