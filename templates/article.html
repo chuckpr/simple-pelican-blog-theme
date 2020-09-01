@@ -31,7 +31,7 @@
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/pygments.css">
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/article.css">
 
-  {% if EXTRA_CSS is defined and EXTRA_CSS.get("article", None) is not None %}
+  {% if EXTRA_CSS is defined and EXTRA_CSS.get("article", None) is not none %}
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ EXTRA_CSS["article"] }}">
   {% endif %}
 
